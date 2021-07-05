@@ -9,9 +9,10 @@ const sendButton = document.querySelector(".send-button");
 const displayContainer = document.querySelector(".display-container");//scroll
 
 chatInput.addEventListener("keypress", (event)=> { //send chat by pressing enter
-    if(event.keyCode === 13){
+    if(event.keyCode === 13){   
         send()
     }
+
 })
 
 function send(){
@@ -19,10 +20,15 @@ function send(){
         name: nickname.value, 
         msg: chatInput.value
     }
-    socket.emit("chattingID", param)
+    chatInput.value = ''; //clear input
+    socket.emit("chattingID", param);
+    
 }
 
+
 sendButton.addEventListener("click", send) 
+ 
+
 
 
 socket.on("chattingID", (data)=> {
